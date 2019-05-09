@@ -1,0 +1,10 @@
+{
+  "db": {
+    "dbConfig": {
+      "host": "mongodb://zouhaier:13224449yeS@ds231941.mlab.com:31941",
+      "dbName": "burgerbienne"
+    }
+  },
+  "port": 8000,
+  "sekretCode": "13224449"
+}

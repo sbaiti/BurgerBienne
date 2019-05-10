@@ -26,22 +26,36 @@ Router.post(
 );
 
 Router.post("/login", (req, res) => {
-    const { error } = validateLogin(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
     userServices
         .login(req.body)
         .then(user =>
             userServices.generateToken(user).then(userObject => {
                 res.status(201).json({
                     token: userObject,
+                    user,
                     msg: "success"
                 });
             })
-            )
-            .catch(err => {
+        )
+        .catch(err => {
             res.status(400).json({ err });
         });
 });
+
+Router.get(
+    "/:id",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+        userServices
+            .getUserById(req.params.id)
+            .then(userObject => {
+                res.status(201).json({ userObject })
+            })
+            .catch(err => {
+                res.status(400).json({ err });
+            });
+    }
+);
 
 function validateLogin(req) {
     const schema = {

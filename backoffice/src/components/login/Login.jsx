@@ -1,37 +1,100 @@
-import React from 'react'
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Button, Form, Grid, Header, Message, Segment, Image } from 'semantic-ui-react';
+import { onLogin } from '../../actions/AuthActions';
+import logo from '../../assets/login.png';
+import { connect } from 'react-redux';
+import './Login.css';
 
-const LoginForm = () => (
-    <div style={{ marginTop:"23vh" }}>
-        <div className='login-form'>
-            <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
-                <Grid.Column style={{ maxWidth: 450 }}>
-                    <Header as='h2' color='teal' textAlign='center'>
-                        Log-in to your account
-        </Header>
-                    <Form size='large'>
-                        <Segment stacked>
-                            <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
-                            <Form.Input
-                                fluid
-                                icon='lock'
-                                iconPosition='left'
-                                placeholder='Password'
-                                type='password'
-                            />
+class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            Login: null,
+            Password: null,
+            error: ""
+        }
+    }
 
-                            <Button color='teal' fluid size='large'>
-                                Login
-            </Button>
-                        </Segment>
-                    </Form>
-                    <Message>
-                        Login Form
-                </Message>
-                </Grid.Column>
-            </Grid>
-        </div>
-    </div>
-)
+    componentDidMount() {
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push("/home");
+        }
+    }
+    
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.auth.isAuthenticated) {
+            this.props.history.push("/home");
+        }
+        if (nextProps.auth.error) {
+            this.setState({ error: nextProps.auth.error.err });
+        }
+    };
 
-export default LoginForm
+    handleChange = ({ target: { name, value } }) => {
+        this.setState({ [name]: value });
+    }
+
+    onLoginUser = () => {
+        const { Login, Password } = this.state;
+        this.props.onLogin(Login, Password);
+    }
+
+    render() {
+        const { Login, Password, error } = this.state;
+        return (
+            <div className="login">
+                <div className='login-form'>
+                    <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+                        <Grid.Column style={{ maxWidth: 450 }}>
+                            <Header as='h2' color='teal' textAlign='center'>
+                                <Image src={logo} /> Log-in to your account
+            </Header>
+                            <Form size='large'>
+                                <Segment stacked>
+                                    <Form.Input fluid
+                                        icon='user'
+                                        iconPosition='left'
+                                        placeholder='Login'
+                                        type='text'
+                                        name="Login"
+                                        onChange={this.handleChange}
+                                    />
+                                    <Form.Input
+                                        fluid
+                                        icon='lock'
+                                        iconPosition='left'
+                                        placeholder='Password'
+                                        name="Password"
+                                        type='password'
+                                        onChange={this.handleChange}
+                                    />
+
+                                    <Button
+                                        disabled={!Login || !Password}
+                                        onClick={this.onLoginUser}
+                                        color='teal'
+                                        fluid
+                                        size='large'>
+                                        Login
+                </Button>
+                                </Segment>
+                            </Form>
+                            {error && <Message color='red'>{error}</Message>}
+                        </Grid.Column>
+                    </Grid>
+                </div>
+            </div>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    };
+}
+
+export default connect(
+    mapStateToProps, { onLogin }
+)(Login);
+

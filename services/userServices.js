@@ -9,10 +9,10 @@ const jwt = require("jsonwebtoken");
 const UserServices = {};
 UserServices.register = register;
 UserServices.login = login;
+UserServices.getUserById = getUserById;
 UserServices.generateToken = generateToken;
 
 function register(userObj) {
-    console.log('userObj----------', userObj);
     newUser = new User({
         Name: userObj.Name,
         Password: Bcrypt.hashSync(userObj.Password, Salt),
@@ -37,15 +37,15 @@ function register(userObj) {
 
 function login(userLogin) {
     var deferred = Q.defer();
-    User.findOne({ Email: userLogin.Email }, async (err, user) => {
+    User.findOne({ Login: userLogin.Login }, async (err, user) => {
         if (err) deferred.reject(err);
-        else if (!user) deferred.reject("Invalid email or password.");
+        else if (!user) deferred.reject("Invalid Login or password.");
         else {
             const validPassword = await Bcrypt.compare(
                 userLogin.Password,
                 user.Password
             );
-            if (!validPassword) return deferred.reject("Invalid email or password.");
+            if (!validPassword) return deferred.reject("Invalid Login or password.");
             else deferred.resolve(user);
         }
     });
@@ -75,5 +75,18 @@ function generateToken(user) {
     );
     return deferred.promise;
 }
+
+function getUserById(id) {
+    var deferred = Q.defer();
+  
+    User.findById({ _id: id }, (err, user) => {
+      if (err) deferred.reject(err);
+      else if (!user) deferred.reject("user with the given ID does not exist");
+      else {
+        deferred.resolve(user);
+      }
+    });
+    return deferred.promise;
+  }
 
 module.exports = UserServices;

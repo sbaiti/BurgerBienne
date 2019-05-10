@@ -10,7 +10,7 @@ process.env.VENDOR_NODE_ENV = process.env.VENDOR_NODE_ENV || "development";
 const express = require("express");
 const config = require('./config/environnement.json');
 const mongoose = require('mongoose');
-
+const passport = require("passport");
 
 //Connect to database
 mongoose.Promise = global.Promise;
@@ -28,8 +28,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require("path");
 
+require("./passport/passportJwt")(passport);
+passport.initialize();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 require("./middleware/cors")(app);
 
 app.use("/Slider",require('./controlers/slider'));

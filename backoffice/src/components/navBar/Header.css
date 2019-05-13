@@ -1,33 +1,44 @@
   .site-logo {
-    color: #222222;
-    display: table;
-    padding: 10px;
-    text-align: left;
-    margin-left: 5px;
-    height: 70px;
-    position: relative;
+      color: #222222;
+      display: table;
+      padding: 10px;
+      text-align: left;
+      margin-left: 5px;
+      height: 70px;
+      position: relative;
   }
+
   .site-logo img {
-    height: 80px;
-    width: 300px;
+      height: 80px;
+      width: 300px;
   }
-  .Welcome{
-    font-size: 20px !important;
-    margin-right: 10px;
-    font-family: Lemon milk bold;
-    font-weight: 1000;
+
+  .Welcome {
+      font-size: 20px !important;
+      margin-right: 10px;
+      font-family: Lemon milk bold;
+      font-weight: 1000;
   }
+
   .fullscreen-button,
-    .overlay-button{
+  .overlay-button {
       z-index: 1000;
-        width: 60px;
-        height: 40px;
-        margin: auto;
-        float: right;
-        background-color: none !important; 
-    }
-.Label{
-  text-align: center !important;
-  font-size: 15px !important;
-  width: 250px;
-}  
+      width: 60px;
+      height: 40px;
+      margin: auto;
+      float: right;
+      background-color: none !important;
+  }
+
+  .Label {
+      text-align: center !important;
+      font-size: 15px !important;
+      width: 250px;
+  }
+
+  .info__css {
+      font-size: 20px !important;
+      font-family: Lemon milk bold;
+      font-weight: 1000;
+      padding: 10%;
+  }

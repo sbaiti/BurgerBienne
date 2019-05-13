@@ -8,7 +8,7 @@ sliderServices.getAllSlider = getAllSlider;
 sliderServices.deleteByIdSlider = deleteByIdSlider;
 sliderServices.deleteAllSlider = deleteAllSlider;
 
-/* ***************************** addSlider ************************************** */
+/* ***************************** addSlider ***************************************/
 
 
 function addSlider(slider) {

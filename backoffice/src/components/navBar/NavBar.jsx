@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Menu, Icon } from 'semantic-ui-react';
-import { onLogout } from '../../actions/AuthActions';
 import logo from '../../assets/burgerbiene_logo2x-neu.png';
 import FullscreenUtil from '../../utils/FullscreenUtil';
-import DateUser from './DataUser';
+import Info from './Info';
 import './Header.css';
 
 class NavBar extends Component {
@@ -45,7 +44,7 @@ class NavBar extends Component {
                                             <i className="fas fa-info"></i>
                                         </button>}
                                         header="Information"
-                                        content={<DateUser />}
+                                        content={<Info />}
                                         actions={["Stornieren", { key: 'done', content: "Schließen", positive: true }]}
                                     />
                                 </div>
@@ -53,8 +52,6 @@ class NavBar extends Component {
                         </div>
                     </Menu.Menu>
                 </Menu>
-                }
-
             </div>
         );
     }

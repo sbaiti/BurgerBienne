@@ -14,7 +14,7 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LOGOUT:
             return {
-                INITIAL_STATE
+                ...INITIAL_STATE
             };
         case LOGIN_USER:
             return {

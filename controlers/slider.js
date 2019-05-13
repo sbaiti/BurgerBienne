@@ -18,13 +18,13 @@ var upload = multer({ storage: storage });
 
 Router.post('/addSlider', upload.single('image'),
     (req, res) => {
-        console.log('req---', req.body);
+        console.log(req.body);
         sliderServices
             .addSlider(req)
             .then(sliderObject => {
                 res
                     .status(201)
-                    .json({ slider: sliderObject, msg: "slider added with success" }/*)*/);
+                    .json({ slider: sliderObject, msg: "slider added with success" });
             })
             .catch(err => {
                 res.status(400).json({ err });

@@ -7,7 +7,6 @@ export const onLogin = (email, password) => {
             const { data } = User;
             loginWithJwt(data.token);
             const userDecoded = getCurrentUser(data);
-            console.log('***********',userDecoded);
             dispatch(successLogin(userDecoded));
         })
             .catch(err => {
@@ -30,6 +29,6 @@ export const successLogin = (user) => {
     };
 };
 
-export const onLogout = () => {
+export const onLogout = (history) => {
     return { type: LOGOUT };
 };

@@ -1,0 +1,10 @@
+.home__css {
+    height: 86vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,46 @@
+.sidenav---sidenav---_2tBP{
+    position: relative;
+}
+
+.sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T{
+    position: relative;
+    font-size: 15px !important;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+}
+.sidenav---icon-bar---u1f02{
+    background-color: red !important;
+} 
+
+.sidenav---navitem---9uL5T{
+    color: #3388FF !important;
+}
+.sidenav---navitem---9uL5T:hover{
+    cursor: pointer;
+    background-color: gold !important;
+}
+.sidenav---navtext---1AE_f{
+    
+    color: rgb(33, 72, 136) !important;
+}
+.sidenav---sidenav---_2tBP *, .sidenav---sidenav---_2tBP *:before{
+    color: rgb(33, 72, 136) ;
+}
+.sidenav---sidenav---_2tBP *:after{
+    color: gold;
+}
+.sidenav---sidenav-navitem---uwIJ- >.sidenav---selected---1EK3y >.sidenav---highlighted---oUx9u{
+    background-color: gold !important;
+}
+.sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T::after, .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T::after{
+    background: blue !important;
+    opacity: 0.1;
+    
+}
+.side__bar{
+    z-index: 1000;
+    height: 100%;
+    font-family: Lemon milk bold;
+    border-top:8px #3388FF solid; 
+    border-right:8px #3388FF solid; 
+    border-radius: 0px 0px 160px 0px ;
+  }

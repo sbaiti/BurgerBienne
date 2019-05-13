@@ -15,28 +15,13 @@ class Login extends Component {
         }
     }
 
-    componentDidMount() {
-        if (this.props.auth.isAuthenticated) {
-            this.props.history.push("/home");
-        }
-    }
-    
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-            this.props.history.push("/home");
-        }
-        if (nextProps.auth.error) {
-            this.setState({ error: nextProps.auth.error.err });
-        }
-    };
-
     handleChange = ({ target: { name, value } }) => {
         this.setState({ [name]: value });
     }
 
     onLoginUser = () => {
         const { Login, Password } = this.state;
-        this.props.onLogin(Login, Password);
+        this.props.onLogin(Login, Password, this.props.history);
     }
 
     render() {

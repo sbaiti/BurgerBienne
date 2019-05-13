@@ -2,7 +2,7 @@ const express = require("express"),
     Router = express.Router(),
     userServices = require("../services/userServices"),
     { validate } = require("../validators/user"),
-    // passport = require("passport"),
+    passport = require("passport"),
     Joi = require("joi");
 
 //passport.authenticate("jwt", { session: false })

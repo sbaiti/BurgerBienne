@@ -17,13 +17,19 @@ export async function getSliders() {
 }
 
 export async function addSliders(slider) {
-
-    console.log(slider);
     const sliders = await axios.post(`${apiEndpoint}/addSlider`, slider, { headers: { ...getAuthorization(), 'content-type': 'multipart/form-data' } });
     return sliders;
 }
 
+export async function deleteAllSliders() {
+    const sliders = await axios.put(`${apiEndpoint}/deleteAllSlider`, { headers: { ...getAuthorization(), 'content-type': 'multipart/form-data' } });
+    return sliders;
+}
 
+export async function deleteOneSlider(id) {
+    const slider = await axios.put(`${apiEndpoint}/deleteSlider`, { id }, { headers: getAuthorization() });
+    return slider;
+}
 
 function getAuthorization() {
     return { Authorization: `Bearer ${getJwt()}` };

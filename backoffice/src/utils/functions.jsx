@@ -7,15 +7,13 @@ function prepareData(data) {
         {
             image: <img
                 src={`${config.apiUrl}/Slider/Images?image=` + item.Name}
-                alt="event"
+                alt="slider"
                 key={key}
                 id={item._id}
-                width={'230px'}
-                height={'350px'}
+                width={'700px'}
+                height={'300px'}
             >
-            </img>,
-            name: item.nameEvent || '',
-            detail: item.Description || ''
+            </img>
         }
     ));
     return array;

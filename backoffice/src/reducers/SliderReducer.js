@@ -25,6 +25,11 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 slider: action.payload
             };
+        case DELETE_SLIDER:
+            return {
+                ...state,
+                sliders: action.payload
+            };
         case TOGGLE:
             return {
                 ...state,

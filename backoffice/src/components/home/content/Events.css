@@ -27,3 +27,41 @@
     margin: auto;
     height: 60vh;
 }
+.yes__data {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 10px;
+}
+.img__size {
+    padding: 5px;
+    border: 2px solid orange;
+}
+.img__size:hover {
+    border: 2px solid #fff168;
+    cursor: pointer;
+}
+.ctn__img {
+    padding: 20px;
+    margin: auto !important;
+}
+.yes__data>div {
+    flex: 1 1 auto;
+    text-align: center;
+    margin: 15px;
+    /* and that, will result in a 10px gap */
+}
+@media only screen and (max-width: 600px) {
+
+    /* For mobile phones: */
+    .yes__data {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: auto;
+        margin-bottom: 10px;
+        max-height: 60vh;
+        flex-direction: column;
+    }
+}

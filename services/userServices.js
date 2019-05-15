@@ -69,7 +69,6 @@ function generateToken(user) {
             if (err) deferred.reject(err);
             else {
                 deferred.resolve(token);
-                console.log({ token });
             }
         }
     );

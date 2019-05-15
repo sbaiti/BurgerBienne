@@ -18,7 +18,6 @@ var upload = multer({ storage: storage });
 
 Router.post('/addSlider', upload.single('image'),
     (req, res) => {
-        console.log(req.body);
         sliderServices
             .addSlider(req)
             .then(sliderObject => {
@@ -77,5 +76,20 @@ Router.get('/AllSlider',
     }
 );
 
+Router.get('/Images', function (req, res, next) {
+    var options = {
+        root: path.resolve(process.cwd() + '/Images/'),
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+    var fileName = req.query.image;
+    res.status(200).sendFile(fileName, options, function (err) {
+        if (err)
+            next(err);
+    });
+});
 
 module.exports = (Router)

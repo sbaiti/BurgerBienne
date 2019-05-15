@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
 import { Button, Modal, Segment, Responsive } from 'semantic-ui-react';
-import { togglePopup } from '../../../actions/SlidersActions';
+import { togglePopup, deleteAll, getAllSlider } from '../../../actions/SlidersActions';
 import CtnImg from './CtnImg';
 import Container from './Container';
 import './Events.css';
@@ -20,6 +20,10 @@ class Content extends Component {
     }
 
     /*life  cycle component*/
+
+    async componentWillMount() {
+        await this.props.getAllSlider();
+    }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.slider.open !== nextProps.slider.open) {
@@ -74,7 +78,12 @@ class Content extends Component {
                                 Stornieren
                             </Button>
                             <Button
-                                onClick={this.deleteAllEvents}
+                                onClick={() => {
+                                    this.props.deleteAll();
+                                    this.close();
+                                    toast.success('alles gelöscht');
+                                    this.props.getAllSlider();
+                                }}
                                 positive
                                 labelPosition='right'
                                 icon='checkmark'
@@ -108,74 +117,5 @@ function mapStateToProps(state) {
     };
 }
 export default connect(
-    mapStateToProps, { togglePopup }
+    mapStateToProps, { togglePopup, deleteAll, getAllSlider }
 )(Content);
-
-// addEvent = (obj) => {
-//     const id = localStorage.getItem('idRestaurant');
-//     const formData = new FormData();
-//     formData.append('image', obj.file);
-//     formData.append('idRestaurant', id);
-//     formData.append('Type', 'Event');
-//     formData.append('dateEvent', obj.dateEvent);
-//     formData.append('Description', obj.Description);
-//     formData.append('nameEvent', obj.nameEvent);
-//     const configRequest = {
-//         headers: {
-//             'content-type': 'multipart/form-data'
-//         }
-//     };
-//     axios.post(`${config.urlServer.url}:${config.urlServer.port}/File/Photos`, formData, configRequest)
-//         .then((response) => {
-//             this.getEvents();
-//         }
-//         ).catch((error) => {
-//             if (error.response)
-//                 toast.error(<Greet msg={error.response.data.msg} />)
-//             else
-//                 toast.error(<Greet msg={'Server fehler'} />)
-//         });
-
-// }
-
-// deleteEvent = (id) => {
-//     axios.put(`${config.urlServer.url}:${config.urlServer.port}/File/delete`, { id, Type: 'Event' })
-//         .then((res) => {
-//             this.getEvents();
-//             toast.success(<Greet msg={'gelöscht !'} />);
-//         }).catch((error) => {
-//             if (error.response)
-//                 toast.error(<Greet msg={error.response.data.msg} />)
-//             else
-//                 toast.error(<Greet msg={'Server fehler'} />)
-//         });
-// }
-
-// deleteAllEvents = () => {
-//     const idRestaurant = localStorage.getItem('idRestaurant');
-//     axios.put(`${config.urlServer.url}:${config.urlServer.port}/File/deleteAll`, { idRestaurant, Type: 'Event' })
-//         .then((res) => {
-//             this.getEvents();
-//             toast.success(<Greet msg={'gelöscht !'} />);
-//         }).catch((error) => {
-//             if (error.response)
-//                 toast.error(<Greet msg={error.response.data.msg} />)
-//             else
-//                 toast.error(<Greet msg={'Server fehler'} />)
-//         });
-// }
-
-    // getEvents = () => {
-    //     const idRestaurant = localStorage.getItem('idRestaurant');
-    //     axios.get(`${config.urlServer.url}:${config.urlServer.port}/File/List`, { params: { idRestaurant: idRestaurant, Type: 'Event' } })
-    //         .then((res) =>
-    //             this.setState({
-    //                 data: res.data.file.reverse()
-    //             })).catch((error) => {
-    //                 if (error.response)
-    //                     toast.error(<Greet msg={error.response.data.msg} />)
-    //                 else
-    //                     toast.error(<Greet msg={'Server fehler'} />)
-    //             });
-    // }
-

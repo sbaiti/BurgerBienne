@@ -1,7 +1,6 @@
 import React from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import { getRoutes } from '../../../utils/routes';
-import { findIndex } from 'lodash';
 import ClickOutside from './ClickOutside';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './Sidebar.css';

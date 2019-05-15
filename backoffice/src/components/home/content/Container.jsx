@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { togglePopup, addSliderAction } from '../../../actions/SlidersActions';
+import { togglePopup, addSliderAction, getAllSlider } from '../../../actions/SlidersActions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
 import { Input, Button, Form } from 'semantic-ui-react';
 
 
@@ -47,13 +49,14 @@ class Container extends Component {
         formData.append('image', file);
         formData.append('state', true);
         this.props.addSliderAction(formData);
+        toast.success('Slider fügte Erfolg hinzu');
+        this.props.getAllSlider();
     }
 
     render() {
         const { imgSelect, file } = this.state;
-        console.log(this.props.slider);
         return (
-            <div>
+            <div style={{ padding: "20px" }}>
                 <Form>
                     <Form.Field>
                         <Input
@@ -71,7 +74,7 @@ class Container extends Component {
                         <center>
                             <div className="img__uploaded">
                                 <img
-                                    src="" height="300" width="300" alt="event" id="event" /></div>
+                                    src="" height="300" width="700" alt="event" id="event" /></div>
                         </center>}
                     <center>
                         <Button
@@ -80,6 +83,7 @@ class Container extends Component {
                             onClick={() => {
                                 this.postSlider(file)
                                 this.props.togglePopup(!this.props.slider.open);
+                                this.props.getAllSlider();
                             }
                             }>
                             <i className="fas fa-check-circle"></i>  {' '}
@@ -87,11 +91,22 @@ class Container extends Component {
                         </Button>
                     </center>
                 </Form>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover
+                />
             </div>
         );
     }
 }
 
 export default connect(
-    mapStateToProps, { togglePopup, addSliderAction }
+    mapStateToProps, { togglePopup, addSliderAction, getAllSlider }
 )(Container);
